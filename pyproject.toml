@@ -11,6 +11,6 @@ ignore_missing_imports = true
 warn_unused_configs = true
 
 [tool.pytest.ini_options]
-addopts = "--cov=agents --cov-report=term-missing --cov-report=xml --cov-fail-under=80"
+addopts = "--cov=agents --cov=mcp_server --cov-report=term-missing --cov-report=xml --cov-fail-under=80"
 testpaths = ["tests"]
 python_files = ["test_*.py"]

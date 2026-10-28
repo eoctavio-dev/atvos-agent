@@ -13,9 +13,12 @@ def test_root_agent_configuration() -> None:
 
 
 def test_root_agent_describes_google_cloud_scope() -> None:
+    assert isinstance(root_agent.description, str)
+    assert isinstance(root_agent.instruction, str)
     assert "Google Cloud" in root_agent.description
     assert "Google Cloud" in root_agent.instruction
 
 
 def test_root_agent_instructions_require_grounded_answers() -> None:
+    assert isinstance(root_agent.instruction, str)
     assert "No inventes resultados" in root_agent.instruction

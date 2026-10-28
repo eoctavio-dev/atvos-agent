@@ -71,4 +71,18 @@ adk deploy cloud_run \
 
 El comando publica el agente y devuelve la URL del servicio. El servicio necesita permisos para llamar a Vertex AI.
 
+## Consumir el agente desde MCP
+
+La configuración de VS Code está en `.vscode/mcp.json`. El servidor MCP usa
+Python del entorno virtual y expone la herramienta `ask_atvos_agent`.
+
+Para iniciarlo manualmente:
+
+```bash
+source .venv/bin/activate
+python mcp_server.py
+```
+
+La herramienta acepta un mensaje y, opcionalmente, un `session_id` para continuar una conversación anterior.
+
 Copia `.env.example` como `.env` y reemplaza los valores de ejemplo por los datos reales del proyecto.

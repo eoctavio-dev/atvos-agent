@@ -1,5 +1,5 @@
 PYTHON := python
-PYTHON_FILES := agents check_setup.py
+PYTHON_FILES := agents check_setup.py mcp_server.py tests
 
 .PHONY: install install-dev lint format typecheck complexity test validate clean
 
