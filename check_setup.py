@@ -2,7 +2,7 @@ import shutil
 
 from google.auth import default
 
-print(f"Python environment ready")
+print("Python environment ready")
 print(f"gcloud: {shutil.which('gcloud') or 'not found'}")
 
 try:
