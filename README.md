@@ -47,4 +47,28 @@ Verifica la configuracion:
 python check_setup.py
 ```
 
+## Ejecutar el agente ADK en local
+
+```bash
+adk web agents --host 0.0.0.0 --port 8000
+```
+
+Abre `http://localhost:8000` y selecciona `atvos_agent`.
+
+## Ejecutar el agente en Google Cloud
+
+Configura y habilita las APIs necesarias:
+
+```bash
+gcloud config set project ageless-venture-509715-t8
+gcloud services enable aiplatform.googleapis.com run.googleapis.com
+adk deploy cloud_run \
+  --project=ageless-venture-509715-t8 \
+  --region=us-central1 \
+  --with_ui \
+  agents/atvos_agent
+```
+
+El comando publica el agente y devuelve la URL del servicio. El servicio necesita permisos para llamar a Vertex AI.
+
 Copia `.env.example` como `.env` y reemplaza los valores de ejemplo por los datos reales del proyecto.
