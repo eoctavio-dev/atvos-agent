@@ -1,4 +1,6 @@
+import os
 import uuid
+from typing import Literal, cast
 
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
@@ -7,7 +9,7 @@ from mcp.server.fastmcp import FastMCP
 
 from agents.atvos_agent import root_agent
 
-mcp = FastMCP("Atvos Agent MCP")
+mcp = FastMCP("Atvos Agent MCP", port=8001)
 sessions = InMemorySessionService()
 runner = Runner(
     app_name="atvos_agent_mcp",
@@ -60,4 +62,8 @@ async def ask_atvos_agent(
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    transport = cast(
+        Literal["stdio", "sse", "streamable-http"],
+        os.getenv("MCP_TRANSPORT", "stdio"),
+    )
+    mcp.run(transport=transport)
