@@ -1,3 +1,13 @@
-from .agent import root_agent
+from .agent import (
+    campaign_description_agent,
+    campaign_orchestrator,
+    campaign_prompt_agent,
+    root_agent,
+)
 
-__all__ = ["root_agent"]
+__all__ = [
+    "campaign_description_agent",
+    "campaign_orchestrator",
+    "campaign_prompt_agent",
+    "root_agent",
+]

@@ -71,4 +71,44 @@ adk deploy cloud_run \
 
 El comando publica el agente y devuelve la URL del servicio. El servicio necesita permisos para llamar a Vertex AI.
 
+## Consumir el agente desde MCP
+
+La configuración de VS Code está en `.vscode/mcp.json`. El servidor MCP usa
+Python del entorno virtual y expone la herramienta `ask_atvos_agent`.
+
+Para iniciarlo manualmente:
+
+```bash
+source .venv/bin/activate
+python mcp_server.py
+```
+
+La herramienta acepta un mensaje y, opcionalmente, un `session_id` para continuar una conversación anterior.
+
+## Preparar permisos y recursos de GCP
+
+Comprueba primero el proyecto, la cuenta activa y los permisos sin modificar recursos:
+
+```bash
+bash scripts/setup_atvos_gcp.sh --check-only
+```
+
+La cuenta administradora debe conceder primero los roles indicados por el script.
+Después puedes preparar API, ADC y dependencias completas:
+
+```bash
+bash scripts/setup_atvos_gcp.sh \
+  --project ageless-venture-509715-t8 \
+  --location us-central1 \
+  --account octavio@luisalcantara.altostrat.com
+```
+
+El script no elimina recursos ni concede roles automáticamente. Para comprobar IAM después de asignarlos:
+
+```bash
+gcloud projects get-iam-policy ageless-venture-509715-t8 \
+  --flatten='bindings[].members' \
+  --filter='bindings.members:octavio@luisalcantara.altostrat.com'
+```
+
 Copia `.env.example` como `.env` y reemplaza los valores de ejemplo por los datos reales del proyecto.

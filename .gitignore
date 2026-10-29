@@ -15,5 +15,6 @@ htmlcov/
 .env.local
 
 # Editors and OS files
-.vscode/
+.vscode/*
+!.vscode/mcp.json
 .DS_Store
