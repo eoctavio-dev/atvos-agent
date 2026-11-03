@@ -1,0 +1,33 @@
+{
+  "displayName": "Atvos Agent - MCP y Vertex AI",
+  "gridLayout": {
+    "columns": 2,
+    "widgets": [
+      {
+        "title": "Llamadas MCP",
+        "xyChart": {
+          "dataSets": [{"timeSeriesQuery": {"timeSeriesFilter": {"filter": "metric.type=\"workload.googleapis.com/atvos.mcp.tool.calls\"", "aggregation": {"alignmentPeriod": "60s", "perSeriesAligner": "ALIGN_RATE", "crossSeriesReducer": "REDUCE_SUM", "groupByFields": ["resource.label.service_name"]}}}}],
+          "yAxis": {"label": "llamadas/seg", "scale": "LINEAR"}
+        }
+      },
+      {
+        "title": "Errores MCP",
+        "xyChart": {
+          "dataSets": [{"timeSeriesQuery": {"timeSeriesFilter": {"filter": "metric.type=\"workload.googleapis.com/atvos.mcp.tool.errors\"", "aggregation": {"alignmentPeriod": "60s", "perSeriesAligner": "ALIGN_RATE", "crossSeriesReducer": "REDUCE_SUM"}}}}],
+          "yAxis": {"label": "errores/seg", "scale": "LINEAR"}
+        }
+      },
+      {
+        "title": "Duración MCP",
+        "xyChart": {
+          "dataSets": [{"timeSeriesQuery": {"timeSeriesFilter": {"filter": "metric.type=\"workload.googleapis.com/atvos.mcp.tool.duration\"", "aggregation": {"alignmentPeriod": "60s", "perSeriesAligner": "ALIGN_PERCENTILE_95", "crossSeriesReducer": "REDUCE_MEAN"}}}}],
+          "yAxis": {"label": "segundos", "scale": "LINEAR"}
+        }
+      },
+      {
+        "title": "Logs del agente y Vertex AI",
+        "logsPanel": {"filter": "resource.type=\"global\" AND (logName:\"gen_ai\" OR textPayload:\"atvos\")", "resourceNames": ["projects/gsd-appmod"]}
+      }
+    ]
+  }
+}
