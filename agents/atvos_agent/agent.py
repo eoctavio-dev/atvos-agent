@@ -1,6 +1,10 @@
+import os
+
+from dotenv import load_dotenv
 from google.adk.agents import Agent, SequentialAgent
 
-MODEL = "gemini-2.5-flash"
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 campaign_prompt_agent = Agent(
     name="campaign_prompt_agent",
