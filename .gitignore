@@ -6,13 +6,19 @@ __pycache__/
 *$py.class
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
 .adk/
 
 # Local configuration
 .env
 .env.local
+*.json.key
+*.private.json
+service-account*.json
+credentials*.json
 
 # Editors and OS files
-.vscode/
+.vscode/*
+!.vscode/mcp.json
 .DS_Store
