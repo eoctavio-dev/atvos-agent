@@ -13,6 +13,10 @@ htmlcov/
 # Local configuration
 .env
 .env.local
+*.json.key
+*.private.json
+service-account*.json
+credentials*.json
 
 # Editors and OS files
 .vscode/*

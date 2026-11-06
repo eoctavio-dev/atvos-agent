@@ -2,12 +2,19 @@ import os
 import uuid
 from typing import Literal, cast
 
+os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "true")
+os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "gsd-appmod")
+os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "us-central1")
+
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 from mcp.server.fastmcp import FastMCP
 
 from agents.atvos_agent import root_agent
+from observability import record_tool_call, setup_observability
+
+setup_observability()
 
 mcp = FastMCP("Atvos Agent MCP", port=8001)
 sessions = InMemorySessionService()
@@ -54,6 +61,7 @@ async def run_agent(message: str, session_id: str | None = None) -> dict[str, st
 
 
 @mcp.tool()
+@record_tool_call("ask_atvos_agent", {"service.name": "atvos-agent-mcp"})
 async def ask_atvos_agent(
     message: str, session_id: str | None = None
 ) -> dict[str, str]:
